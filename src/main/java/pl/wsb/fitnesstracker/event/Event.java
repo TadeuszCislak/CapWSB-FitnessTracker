@@ -1,55 +1,38 @@
 package pl.wsb.fitnesstracker.event;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-// TODO: Define the Event entity with appropriate fields and annotations
 @Entity
-@Table
+@Table(name = "event")
 @Getter
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = true)
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
-    private LocalDate startTime;
+    @Column(name = "start_time", nullable = false)
+    private LocalDateTime startTime;
 
-    @Column(nullable = true)
-    private LocalDate endTime;
+    @Column(name = "end_time", nullable = false)
+    private LocalDateTime endTime;
 
-    @Column(nullable = true)
+    @Column(name = "country")
     private String country;
 
-    @Column(nullable = true)
+    @Column(name = "city")
     private String city;
 
-    public Event(
-            final Long id,
-            final String name,
-            final String description,
-            final LocalDate startTime,
-            final LocalDate endTime,
-            final String country,
-            final String city) {
-
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.country=country;
-        this.city = city;
-    }
 }
